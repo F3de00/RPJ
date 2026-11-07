@@ -6,7 +6,7 @@ public interface Entita {
     Risultato compiAzione(Azione azione, Entita bersaglio);
     List<Azione> getAzioni();
     int getAttacco();
-    int dannoEffettivo(int quantita);   
+    int subisceDanno(int quantita);   
     void recuperaVita(int quantita);
     void recuperaMana(int quantita);
     boolean isViva();

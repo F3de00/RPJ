@@ -1,4 +1,5 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.model;
+import java.util.List;
 
 
 public class Mago extends EntitaBase {

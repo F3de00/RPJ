@@ -1,8 +1,7 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.model;
 
 public class Mago extends EntitaBase {
-    public Mago(String nome, Statistiche statistiche) { super(nome, statistiche); }
+    public Mago(String nome, Statistiche statistiche) { super(nome, statistiche, new AttaccoSemplice()); }
 
-    @Override public Risultato attacca(Entita bersaglio) { /* TODO */ return null; }
     // TODO: azioni specifiche del mago
 }

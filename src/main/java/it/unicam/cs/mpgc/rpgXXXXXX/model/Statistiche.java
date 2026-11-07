@@ -19,7 +19,11 @@ public class Statistiche {
     public int getMana()    { return mana; }
     public int getAttacco() { return attacco; }
     public boolean isViva() { return vita > 0; }
-    public void riduciVita(int quantita)  { /* ... */ }
+    public int riduciVita(int quantita) {
+        int vitaPrima = vita;
+        vita = Math.max(0, vita - quantita);
+        return vitaPrima - vita;           // danno realmente assorbito
+    }
     public void aumentaVita(int quantita) { /* ... */ }
     public void aumentaMana(int quantita) { /* ... */ }
 }

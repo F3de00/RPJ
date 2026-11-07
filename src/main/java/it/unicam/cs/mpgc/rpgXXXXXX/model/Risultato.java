@@ -1,5 +1,3 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.model;
 
-public class Risultato {
-    
-}
+public record Risultato(Esito esito, int dannoSubito) { }

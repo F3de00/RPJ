@@ -1,8 +1,12 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.model;
 
+import java.util.List;
+
 public interface Entita {
-    Risultato attacca(Entita bersaglio);
-    int subisceDanno(int quantita);   // restituisce il danno effettivamente subito
+    Risultato compiAzione(Azione azione, Entita bersaglio);
+    List<Azione> getAzioni();
+    int getAttacco();
+    int dannoEffettivo(int quantita);   
     void recuperaVita(int quantita);
     void recuperaMana(int quantita);
     boolean isViva();

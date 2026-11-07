@@ -1,7 +1,11 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.model;
 
-public class Guerriero extends EntitaBase {
-    public Guerriero(String nome, Statistiche statistiche) { super(nome, statistiche, new AttaccoSemplice()); }
+import java.util.List;
 
-    // TODO: azioni specifiche del guerriero
+public class Guerriero extends EntitaBase {
+    public Guerriero(String nome, Statistiche statistiche, List<Azione> azioni) {
+        super(nome, statistiche, azioni);
+    }
+
+    
 }

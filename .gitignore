@@ -10,5 +10,7 @@ bin/
 .project
 .settings/
 
+docs/WIKI.md
+
 .DS_Store
 *.log

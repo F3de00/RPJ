@@ -11,9 +11,9 @@ public class Attacco implements Azione {
         this.strategia = strategia;
     }
 
-    @Override public String getNome() { return nome; }
-    @Override public int getCostoMana() { return costoMana; }
-    @Override public TipoBersaglio getTipoBersaglio() { return TipoBersaglio.AVVERSARIO; }
+    @Override public String getNome() {return nome;}
+    @Override public int getCostoMana() {return costoMana;}
+    @Override public TipoBersaglio getTipoBersaglio() {return TipoBersaglio.AVVERSARIO;}
 
     @Override
     public Risultato esegui(Entita attaccante, Entita bersaglio) {

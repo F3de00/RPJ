@@ -25,7 +25,7 @@ public class Creatura implements Entita {
             throw new IllegalArgumentException("Azione non posseduta: " + azione.getNome());
         }
         if (mana < azione.getCostoMana()) {
-            return new Risultato(Esito.MANA_INSUFFICIENTE, 0);
+            return new Risultato(EsitoAzione.MANA_INSUFFICIENTE, 0);
         }
         mana -= azione.getCostoMana();
         return azione.esegui(this, bersaglio);
@@ -40,15 +40,19 @@ public class Creatura implements Entita {
     }
 
     @Override
-    public void recuperaVita(int quantita) {
-        verificaNonNegativa(quantita);
-        vita = Math.min(statisticheBase.vitaMassima(), vita + quantita);
+    public int recuperaVita(int quantita) {
+      verificaNonNegativa(quantita);
+      int vitaPrima = vita;
+      vita = Math.min(statisticheBase.vitaMassima(), vita + quantita);
+      return vita - vitaPrima;
     }
 
     @Override
-    public void recuperaMana(int quantita) {
+    public int recuperaMana(int quantita) {
         verificaNonNegativa(quantita);
+        int manaPrima = mana;
         mana = Math.min(statisticheBase.manaMassimo(), mana + quantita);
+        return mana - manaPrima;
     }
 
     @Override public List<Azione> getAzioni() {return statisticheBase.azioni();}

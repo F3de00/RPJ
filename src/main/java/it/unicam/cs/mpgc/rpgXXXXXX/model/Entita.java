@@ -10,7 +10,7 @@ public interface Entita {
     int getMana();
     int getAttacco();
     int subisceDanno(int quantita);
-    void recuperaVita(int quantita);
-    void recuperaMana(int quantita);
+    int recuperaVita(int quantita);
+    int recuperaMana(int quantita);
     boolean isViva();
 }

@@ -19,7 +19,7 @@ public class Attacco implements Azione {
     public Risultato esegui(Entita attaccante, Entita bersaglio) {
         int dannoCalcolato = strategia.calcolaDanno(attaccante.getAttacco());
         int dannoSubito = bersaglio.subisceDanno(dannoCalcolato);
-        Esito esito = bersaglio.isViva() ? Esito.COLPITO : Esito.BERSAGLIO_SCONFITTO;
+        EsitoAzione esito = bersaglio.isViva() ? EsitoAzione.COLPITO : EsitoAzione.BERSAGLIO_SCONFITTO;
         return new Risultato(esito, dannoSubito);
     }
 }

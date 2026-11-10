@@ -11,10 +11,11 @@ public record StatisticheBase(
         int vitaMassima,
         int manaMassimo,
         int attacco,
+        int velocita,
         List<Azione> azioni,
         boolean giocabile) {
 
     public StatisticheBase {
-        azioni = List.copyOf(azioni);
+        azioni = List.copyOf(azioni); // copia non modificabile
     }
 }

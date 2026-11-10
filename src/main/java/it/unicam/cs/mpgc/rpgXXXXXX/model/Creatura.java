@@ -15,8 +15,8 @@ public class Creatura implements Entita {
     public Creatura(String nome, StatisticheBase statisticheBase) {
         this.nome = nome;
         this.statisticheBase = statisticheBase;
-        this.vita = statisticheBase.vitaMassima();
-        this.mana = statisticheBase.manaMassimo();
+        this.vita = statisticheBase.vitaMassima(); // ogni creatura ha la propria vita
+        this.mana = statisticheBase.manaMassimo(); // e il proprio mana
     }
 
     @Override
@@ -41,10 +41,10 @@ public class Creatura implements Entita {
 
     @Override
     public int recuperaVita(int quantita) {
-      verificaNonNegativa(quantita);
-      int vitaPrima = vita;
-      vita = Math.min(statisticheBase.vitaMassima(), vita + quantita);
-      return vita - vitaPrima;
+        verificaNonNegativa(quantita);
+        int vitaPrima = vita;
+        vita = Math.min(statisticheBase.vitaMassima(), vita + quantita);
+        return vita - vitaPrima;
     }
 
     @Override
@@ -60,6 +60,7 @@ public class Creatura implements Entita {
     @Override public int getVita() {return vita;}
     @Override public int getMana() {return mana;}
     @Override public int getAttacco() {return statisticheBase.attacco();}
+    @Override public int getVelocita() {return statisticheBase.velocita();}
     @Override public boolean isViva() {return vita > 0;}
 
     public StatisticheBase getStatisticheBase() {return statisticheBase;}

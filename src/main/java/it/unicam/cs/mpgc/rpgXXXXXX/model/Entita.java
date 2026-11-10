@@ -9,8 +9,9 @@ public interface Entita {
     int getVita();
     int getMana();
     int getAttacco();
-    int subisceDanno(int quantita);
-    int recuperaVita(int quantita);
-    int recuperaMana(int quantita);
+    int getVelocita();
+    int subisceDanno(int quantita); // restituisce il danno effettivamente subito
+    int recuperaVita(int quantita); // restituisce la vita effettivamente recuperata
+    int recuperaMana(int quantita); // restituisce il mana effettivamente recuperato
     boolean isViva();
 }

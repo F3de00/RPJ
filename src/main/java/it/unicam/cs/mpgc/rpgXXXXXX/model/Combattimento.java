@@ -36,7 +36,6 @@ public class Combattimento {
         return nemici.stream().filter(Entita::isViva).toList();
     }
 
-    
     public Turno eseguiTurnoGiocatore(Azione azione, Entita bersaglio) {
         if (!isTurnoGiocatore()) {
             throw new IllegalStateException("Non è il turno del giocatore");
@@ -67,22 +66,17 @@ public class Combattimento {
         return new Turno(attore, azione, bersaglio, risultato);
     }
 
-    
     private List<Entita> calcolaOrdine() {
         List<Entita> partecipanti = new ArrayList<>();
         partecipanti.add(eroe);
         partecipanti.addAll(nemici);
-        
         partecipanti.sort(Comparator.comparingInt(Entita::getVelocita).reversed());
         return List.copyOf(partecipanti);
     }
 
     private void passaAlProssimo() {
         do {
-            indiceTurno = indiceTurno + 1;
-            if (indiceTurno == ordine.size()) {
-                indiceTurno = 0;
-            }
+            indiceTurno = (indiceTurno + 1) % ordine.size();
         } while (!ordine.get(indiceTurno).isViva());
     }
 

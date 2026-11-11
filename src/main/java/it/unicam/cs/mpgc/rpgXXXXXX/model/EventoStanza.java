@@ -1,5 +1,7 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.model;
 
+import java.util.Optional;
+
 public interface EventoStanza {
-    void esegui(/* TODO: contesto di gioco */);
+    Optional<Combattimento> esegui(Entita eroe);
 }

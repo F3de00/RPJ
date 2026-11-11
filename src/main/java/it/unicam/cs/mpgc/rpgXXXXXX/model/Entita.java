@@ -8,10 +8,12 @@ public interface Entita {
     String getNome();
     int getVita();
     int getMana();
+    int getVitaMassima();
+    int getManaMassimo();
     int getAttacco();
     int getVelocita();
-    int subisceDanno(int quantita); // restituisce il danno effettivamente subito
-    int recuperaVita(int quantita); // restituisce la vita effettivamente recuperata
-    int recuperaMana(int quantita); // restituisce il mana effettivamente recuperato
+    int subisceDanno(int quantita);
+    int recuperaVita(int quantita);
+    int recuperaMana(int quantita);
     boolean isViva();
 }

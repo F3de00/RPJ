@@ -2,10 +2,6 @@ package it.unicam.cs.mpgc.rpgXXXXXX.model;
 
 import java.util.List;
 
-/**
- * Unica classe concreta di entità: rappresenta sia l'eroe sia i nemici.
- * Le differenze tra Mago, Goblin, Drago... arrivano dalle sue StatisticheBase.
- */
 public class Creatura implements Entita {
     private final String nome;
     private final StatisticheBase statisticheBase;
@@ -15,8 +11,8 @@ public class Creatura implements Entita {
     public Creatura(String nome, StatisticheBase statisticheBase) {
         this.nome = nome;
         this.statisticheBase = statisticheBase;
-        this.vita = statisticheBase.vitaMassima(); // ogni creatura ha la propria vita
-        this.mana = statisticheBase.manaMassimo(); // e il proprio mana
+        this.vita = statisticheBase.vitaMassima(); 
+        this.mana = statisticheBase.manaMassimo(); 
     }
 
     @Override
@@ -59,6 +55,8 @@ public class Creatura implements Entita {
     @Override public String getNome() {return nome;}
     @Override public int getVita() {return vita;}
     @Override public int getMana() {return mana;}
+    @Override public int getVitaMassima() {return statisticheBase.vitaMassima();}
+    @Override public int getManaMassimo() {return statisticheBase.manaMassimo();}
     @Override public int getAttacco() {return statisticheBase.attacco();}
     @Override public int getVelocita() {return statisticheBase.velocita();}
     @Override public boolean isViva() {return vita > 0;}

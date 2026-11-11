@@ -12,6 +12,6 @@ public record StatisticheBase(
         Categoria categoria) {
 
     public StatisticheBase {
-        azioni = List.copyOf(azioni); // copia non modificabile
+        azioni = List.copyOf(azioni);
     }
 }

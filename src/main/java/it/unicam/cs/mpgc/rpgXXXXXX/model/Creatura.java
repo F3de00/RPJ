@@ -11,8 +11,8 @@ public class Creatura implements Entita {
     public Creatura(String nome, StatisticheBase statisticheBase) {
         this.nome = nome;
         this.statisticheBase = statisticheBase;
-        this.vita = statisticheBase.vitaMassima(); 
-        this.mana = statisticheBase.manaMassimo(); 
+        this.vita = statisticheBase.vitaMassima();
+        this.mana = statisticheBase.manaMassimo();
     }
 
     @Override

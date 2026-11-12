@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model;
+package it.unicam.cs.mpgc.rpgXXXXXX.model.creature;
 
 import java.util.List;
 

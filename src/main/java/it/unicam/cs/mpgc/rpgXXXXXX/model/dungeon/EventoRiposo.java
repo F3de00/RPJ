@@ -1,8 +1,8 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model;
+package it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon;
 
-import java.util.Optional;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Entita;
 
-public class EventoRiposo implements EventoStanza {
+public final class EventoRiposo implements EventoStanza {
     private final int percentuale;
 
     public EventoRiposo(int percentuale) {
@@ -14,10 +14,8 @@ public class EventoRiposo implements EventoStanza {
 
     public int getPercentuale() {return percentuale;}
 
-    @Override
-    public Optional<Combattimento> esegui(Entita eroe) {
+    public void applica(Entita eroe) {
         eroe.recuperaVita(eroe.getVitaMassima() * percentuale / 100);
         eroe.recuperaMana(eroe.getManaMassimo() * percentuale / 100);
-        return Optional.empty();
     }
 }

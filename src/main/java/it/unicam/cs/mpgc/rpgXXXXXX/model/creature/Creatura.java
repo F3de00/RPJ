@@ -1,5 +1,8 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model;
+package it.unicam.cs.mpgc.rpgXXXXXX.model.creature;
 
+import it.unicam.cs.mpgc.rpgXXXXXX.model.azioni.Azione;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.azioni.EsitoAzione;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.azioni.Risultato;
 import java.util.List;
 
 public class Creatura implements Entita {

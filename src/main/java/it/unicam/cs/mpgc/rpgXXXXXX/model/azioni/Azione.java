@@ -1,4 +1,6 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model;
+package it.unicam.cs.mpgc.rpgXXXXXX.model.azioni;
+
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Entita;
 
 public interface Azione {
     String getNome();

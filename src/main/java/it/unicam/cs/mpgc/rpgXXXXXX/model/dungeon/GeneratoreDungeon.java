@@ -1,5 +1,10 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model;
+package it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon;
 
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.CatalogoStatistiche;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Categoria;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Creatura;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Entita;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.StatisticheBase;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.random.RandomGenerator;

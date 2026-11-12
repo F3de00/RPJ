@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model;
+package it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon;
 
 public class Stanza {
     private final EventoStanza evento;

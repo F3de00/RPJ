@@ -1,5 +1,9 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model;
+package it.unicam.cs.mpgc.rpgXXXXXX.model.combattimento;
 
+import it.unicam.cs.mpgc.rpgXXXXXX.model.azioni.Azione;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.azioni.Risultato;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.azioni.TipoBersaglio;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Entita;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

@@ -41,7 +41,7 @@ public class Partita {
         verificaStato(StatoPartita.ESPLORAZIONE);
         Stanza stanza = stanze.get(stanzeCompletate);
         switch (stanza.getEvento()) {
-            case EventoCombattimento combattimento -> avviaCombattimento(combattimento.getNemici());
+            case EventoCombattimento combattimento -> avviaCombattimento(combattimento.creaCombattimento(eroe));
             case EventoRiposo riposo -> {
                 riposo.applica(eroe);
                 completaStanza();
@@ -63,8 +63,8 @@ public class Partita {
         return turno;
     }
 
-    private void avviaCombattimento(List<Entita> nemici) {
-        combattimentoCorrente = new Combattimento(eroe, nemici);
+    private void avviaCombattimento(Combattimento combattimento) {
+        combattimentoCorrente = combattimento;
         stato = StatoPartita.IN_COMBATTIMENTO;
     }
 

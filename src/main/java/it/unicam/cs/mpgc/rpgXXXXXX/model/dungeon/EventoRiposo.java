@@ -14,8 +14,9 @@ public final class EventoRiposo implements EventoStanza {
 
     public int getPercentuale() {return percentuale;}
 
-    public void applica(Entita eroe) {
-        eroe.recuperaVita(eroe.getVitaMassima() * percentuale / 100);
-        eroe.recuperaMana(eroe.getManaMassimo() * percentuale / 100);
+    public Recupero applica(Entita eroe) {
+        int vita = eroe.recuperaVita(eroe.getVitaMassima() * percentuale / 100);
+        int mana = eroe.recuperaMana(eroe.getManaMassimo() * percentuale / 100);
+        return new Recupero(vita, mana);
     }
 }

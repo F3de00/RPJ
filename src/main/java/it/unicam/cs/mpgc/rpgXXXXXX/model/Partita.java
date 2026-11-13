@@ -7,12 +7,23 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.combattimento.Turno;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Entita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.EventoCombattimento;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.EventoRiposo;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.Recupero;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.Stanza;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.CombattimentoIniziato;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.Notifica;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaPersa;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaVinta;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.RiposoEffettuato;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.StanzaCompletata;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.TurnoEseguito;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Partita {
     private final Entita eroe;
     private final List<Stanza> stanze;
+    private final List<OsservatorePartita> osservatori;
     private int stanzeCompletate;
     private StatoPartita stato;
     private Combattimento combattimentoCorrente;
@@ -23,6 +34,7 @@ public class Partita {
         }
         this.eroe = eroe;
         this.stanze = List.copyOf(stanze);
+        this.osservatori = new ArrayList<>();
         this.stanzeCompletate = 0;
         this.stato = StatoPartita.ESPLORAZIONE;
     }
@@ -32,10 +44,13 @@ public class Partita {
     public int getStanzeCompletate() {return stanzeCompletate;}
     public int getNumeroStanze() {return stanze.size();}
 
-    public Combattimento getCombattimento() {
+    public Combattimento getCombattimentoCorrente() {
         verificaStato(StatoPartita.IN_COMBATTIMENTO);
         return combattimentoCorrente;
     }
+
+    public void aggiungiOsservatore(OsservatorePartita osservatore) {osservatori.add(osservatore);}
+    public void rimuoviOsservatore(OsservatorePartita osservatore) {osservatori.remove(osservatore);}
 
     public void entraNellaProssimaStanza() {
         verificaStato(StatoPartita.ESPLORAZIONE);
@@ -43,29 +58,31 @@ public class Partita {
         switch (stanza.getEvento()) {
             case EventoCombattimento combattimento -> avviaCombattimento(combattimento.creaCombattimento(eroe));
             case EventoRiposo riposo -> {
-                riposo.applica(eroe);
+                Recupero recupero = riposo.applica(eroe);
+                avvisaOsservatori(new RiposoEffettuato(recupero.vita(), recupero.mana()));
                 completaStanza();
             }
         }
     }
 
-    public Turno eseguiTurnoGiocatore(Azione azione, Entita bersaglio) {
+    public void eseguiTurnoGiocatore(Azione azione, Entita bersaglio) {
         verificaStato(StatoPartita.IN_COMBATTIMENTO);
         Turno turno = combattimentoCorrente.eseguiTurnoGiocatore(azione, bersaglio);
+        avvisaOsservatori(new TurnoEseguito(turno));
         aggiornaDopoTurno();
-        return turno;
     }
 
-    public Turno eseguiTurnoNemico() {
+    public void eseguiTurnoNemico() {
         verificaStato(StatoPartita.IN_COMBATTIMENTO);
         Turno turno = combattimentoCorrente.eseguiTurnoNemico();
+        avvisaOsservatori(new TurnoEseguito(turno));
         aggiornaDopoTurno();
-        return turno;
     }
 
     private void avviaCombattimento(Combattimento combattimento) {
         combattimentoCorrente = combattimento;
         stato = StatoPartita.IN_COMBATTIMENTO;
+        avvisaOsservatori(new CombattimentoIniziato(combattimento));
     }
 
     private void aggiornaDopoTurno() {
@@ -76,6 +93,7 @@ public class Partita {
         } else if (combattimentoCorrente.getStato() == StatoCombattimento.SCONFITTA) {
             combattimentoCorrente = null;
             stato = StatoPartita.GAME_OVER;
+            avvisaOsservatori(new PartitaPersa());
         }
     }
 
@@ -83,6 +101,16 @@ public class Partita {
         stanzeCompletate++;
         if (stanzeCompletate == stanze.size()) {
             stato = StatoPartita.VITTORIA;
+        }
+        avvisaOsservatori(new StanzaCompletata(stanzeCompletate));
+        if (stato == StatoPartita.VITTORIA) {
+            avvisaOsservatori(new PartitaVinta());
+        }
+    }
+
+    private void avvisaOsservatori(Notifica notifica) {
+        for (OsservatorePartita osservatore : List.copyOf(osservatori)) {
+            osservatore.notifica(notifica);
         }
     }
 

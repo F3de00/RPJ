@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="24" styleClass="schermata" stylesheets="@stile.css">
+    <Label text="RPJ - Dungeon Crawler" styleClass="titolo"/>
+    <Label text="Scegli il tuo eroe" styleClass="sottotitolo"/>
+    <HBox fx:id="contenitoreEroi" alignment="CENTER" spacing="24"/>
+</VBox>

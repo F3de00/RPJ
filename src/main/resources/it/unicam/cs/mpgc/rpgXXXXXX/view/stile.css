@@ -1,0 +1,31 @@
+.schermata {
+    -sfondo: #1B2A1E;
+    -superficie: #2F3E2F;
+    -superficie-attiva: #4A5D3A;
+    -testo: #DAD7C9;
+    -testo-secondario: #A8B08D;
+    -oro: #E8D9A8;
+    -fx-background-color: -sfondo;
+}
+
+.titolo {
+    -fx-font-size: 40px;
+    -fx-text-fill: -oro;
+}
+
+.sottotitolo {
+    -fx-font-size: 18px;
+    -fx-text-fill: -testo-secondario;
+}
+
+.scheda-eroe {
+    -fx-pref-width: 220px;
+    -fx-pref-height: 240px;
+    -fx-font-size: 15px;
+    -fx-text-fill: -testo;
+    -fx-background-color: -superficie;
+}
+
+.scheda-eroe:hover {
+    -fx-background-color: -superficie-attiva;
+}

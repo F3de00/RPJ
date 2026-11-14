@@ -42,7 +42,8 @@ public class Navigatore {
     }
 
     public void mostraCombattimento() {
-        mostra(new StackPane(new Label("Combattimento in costruzione")), null);
+        ControllerCombattimento controller = new ControllerCombattimento(partita, this);
+        mostra(carica("Combattimento.fxml", controller), controller);
     }
 
     public void mostraFine() {

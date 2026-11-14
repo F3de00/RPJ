@@ -33,6 +33,25 @@
     -fx-background-color: -superficie-attiva;
 }
 
+.nemico {
+    -fx-pref-width: 160px;
+    -fx-font-size: 16px;
+    -fx-text-fill: -testo;
+    -fx-background-color: -superficie;
+}
+
+.nemico-selezionato {
+    -fx-pref-width: 160px;
+    -fx-font-size: 16px;
+    -fx-text-fill: -sfondo;
+    -fx-background-color: -oro;
+}
+
+.registro {
+    -fx-font-size: 14px;
+    -fx-control-inner-background: -superficie;
+}
+
 .scheda-eroe {
     -fx-pref-width: 220px;
     -fx-pref-height: 240px;

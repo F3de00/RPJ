@@ -7,27 +7,21 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 
 public class Navigatore {
-    private static final String CARTELLA_VIEW = "/it/unicam/cs/mpgc/rpgXXXXXX/view/";
-    private static final double LARGHEZZA = 960;
-    private static final double ALTEZZA = 640;
-    private static final double PORZIONE_SCHERMO = 0.9;
+    private static final String PERCORSO_FXML = "/it/unicam/cs/mpgc/rpgXXXXXX/view/";
 
-    private final Stage stage;
+    private final Scene scena;
     private final FabbricaPartita fabbrica;
     private Partita partita;
     private OsservatorePartita osservatoreCorrente;
 
-    public Navigatore(Stage stage, FabbricaPartita fabbrica) {
-        this.stage = stage;
+    public Navigatore(Scene scena, FabbricaPartita fabbrica) {
+        this.scena = scena;
         this.fabbrica = fabbrica;
     }
 
@@ -56,7 +50,7 @@ public class Navigatore {
     }
 
     private Parent carica(String fileFxml, Object controller) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(CARTELLA_VIEW + fileFxml));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(PERCORSO_FXML + fileFxml));
         loader.setController(controller);
         try {
             return loader.load();
@@ -67,15 +61,7 @@ public class Navigatore {
 
     private void mostra(Parent radice, OsservatorePartita osservatore) {
         cambiaOsservatore(osservatore);
-        if (stage.getScene() == null) {
-            Rectangle2D schermo = Screen.getPrimary().getVisualBounds();
-            double larghezza = Math.min(LARGHEZZA, schermo.getWidth() * PORZIONE_SCHERMO);
-            double altezza = Math.min(ALTEZZA, schermo.getHeight() * PORZIONE_SCHERMO);
-            stage.setScene(new Scene(radice, larghezza, altezza));
-            stage.setResizable(false);
-        } else {
-            stage.getScene().setRoot(radice);
-        }
+        scena.setRoot(radice);
     }
 
     private void cambiaOsservatore(OsservatorePartita nuovo) {

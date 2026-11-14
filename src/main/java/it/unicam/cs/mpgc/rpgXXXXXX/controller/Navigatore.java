@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpgXXXXXX.controller;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.FabbricaPartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.Partita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.StatisticheBase;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ public class Navigatore {
     private final Stage stage;
     private final FabbricaPartita fabbrica;
     private Partita partita;
+    private OsservatorePartita osservatoreCorrente;
 
     public Navigatore(Stage stage, FabbricaPartita fabbrica) {
         this.stage = stage;
@@ -30,16 +32,27 @@ public class Navigatore {
     }
 
     public void mostraSceltaEroe() {
-        mostra(carica("SceltaEroe.fxml", new ControllerSceltaEroe(fabbrica.getEroiDisponibili(), this)));
+        ControllerSceltaEroe controller = new ControllerSceltaEroe(fabbrica.getEroiDisponibili(), this);
+        mostra(carica("SceltaEroe.fxml", controller), null);
     }
 
     public void iniziaPartita(StatisticheBase tipoEroe) {
+        cambiaOsservatore(null);
         partita = fabbrica.nuovaPartita(tipoEroe);
         mostraEsplorazione();
     }
 
     public void mostraEsplorazione() {
-        mostra(new StackPane(new Label("Partita iniziata con " + partita.getEroe().getNome() + ": esplorazione in costruzione")));
+        ControllerEsplorazione controller = new ControllerEsplorazione(partita, this);
+        mostra(carica("Esplorazione.fxml", controller), controller);
+    }
+
+    public void mostraCombattimento() {
+        mostra(new StackPane(new Label("Combattimento in costruzione")), null);
+    }
+
+    public void mostraFine() {
+        mostra(new StackPane(new Label("Fine della partita in costruzione")), null);
     }
 
     private Parent carica(String fileFxml, Object controller) {
@@ -52,7 +65,8 @@ public class Navigatore {
         }
     }
 
-    private void mostra(Parent radice) {
+    private void mostra(Parent radice, OsservatorePartita osservatore) {
+        cambiaOsservatore(osservatore);
         if (stage.getScene() == null) {
             Rectangle2D schermo = Screen.getPrimary().getVisualBounds();
             double larghezza = Math.min(LARGHEZZA, schermo.getWidth() * PORZIONE_SCHERMO);
@@ -61,6 +75,16 @@ public class Navigatore {
             stage.setResizable(false);
         } else {
             stage.getScene().setRoot(radice);
+        }
+    }
+
+    private void cambiaOsservatore(OsservatorePartita nuovo) {
+        if (osservatoreCorrente != null) {
+            partita.rimuoviOsservatore(osservatoreCorrente);
+        }
+        osservatoreCorrente = nuovo;
+        if (nuovo != null) {
+            partita.aggiungiOsservatore(nuovo);
         }
     }
 }

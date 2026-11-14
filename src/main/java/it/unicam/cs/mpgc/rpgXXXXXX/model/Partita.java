@@ -49,6 +49,10 @@ public class Partita {
         return combattimentoCorrente;
     }
 
+    public boolean isTurnoNemico() {
+        return stato == StatoPartita.IN_COMBATTIMENTO && !combattimentoCorrente.isTurnoGiocatore();
+    }
+
     public void aggiungiOsservatore(OsservatorePartita osservatore) {osservatori.add(osservatore);}
     public void rimuoviOsservatore(OsservatorePartita osservatore) {osservatori.remove(osservatore);}
 
@@ -110,7 +114,7 @@ public class Partita {
 
     private void avvisaOsservatori(Notifica notifica) {
         for (OsservatorePartita osservatore : List.copyOf(osservatori)) {
-            osservatore.notifica(notifica);
+            osservatore.riceviNotifica(notifica);
         }
     }
 

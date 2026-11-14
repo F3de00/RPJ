@@ -18,6 +18,21 @@
     -fx-text-fill: -testo-secondario;
 }
 
+.testo {
+    -fx-font-size: 18px;
+    -fx-text-fill: -testo;
+}
+
+.pulsante {
+    -fx-font-size: 18px;
+    -fx-text-fill: -testo;
+    -fx-background-color: -superficie;
+}
+
+.pulsante:hover {
+    -fx-background-color: -superficie-attiva;
+}
+
 .scheda-eroe {
     -fx-pref-width: 220px;
     -fx-pref-height: 240px;

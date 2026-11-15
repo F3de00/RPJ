@@ -9,8 +9,6 @@ import java.io.UncheckedIOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 
 public class Navigatore {
     private static final String PERCORSO_FXML = "/it/unicam/cs/mpgc/rpgXXXXXX/view/";
@@ -47,7 +45,8 @@ public class Navigatore {
     }
 
     public void mostraFine() {
-        mostra(new StackPane(new Label("Fine della partita in costruzione")), null);
+        ControllerFine controller = new ControllerFine(partita, this);
+        mostra(carica("Fine.fxml", controller), null);
     }
 
     private Parent carica(String fileFxml, Object controller) {

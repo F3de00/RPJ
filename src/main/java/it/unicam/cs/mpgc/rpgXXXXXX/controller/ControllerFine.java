@@ -1,7 +1,6 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.controller;
 
 import it.unicam.cs.mpgc.rpgXXXXXX.model.Partita;
-import it.unicam.cs.mpgc.rpgXXXXXX.model.StatoPartita;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -21,8 +20,8 @@ public class ControllerFine {
 
     @FXML
     private void initialize() {
-        etichettaEsito.setText(partita.getStato() == StatoPartita.VITTORIA ? "Vittoria!" : "Game over");
-        etichettaStanze.setText("Stanze completate: " + partita.getStanzeCompletate() + " di " + partita.getNumeroStanze());
+        etichettaEsito.setText("Game over");
+        etichettaStanze.setText("Stanze superate: " + partita.getStanzeCompletate());
     }
 
     @FXML

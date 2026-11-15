@@ -10,7 +10,6 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.CombattimentoIniziato;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.Notifica;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaPersa;
-import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaVinta;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.RiposoEffettuato;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.StanzaCompletata;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.TurnoEseguito;
@@ -76,7 +75,6 @@ public class ControllerCombattimento implements OsservatorePartita {
                 aggiorna();
             }
             case StanzaCompletata stanzaCompletata -> mostraEsito("Vittoria!");
-            case PartitaVinta partitaVinta -> mostraEsito("Vittoria! Hai completato il dungeon");
             case PartitaPersa partitaPersa -> mostraEsito("Sconfitta...");
             case CombattimentoIniziato combattimentoIniziato -> {}
             case RiposoEffettuato riposoEffettuato -> {}

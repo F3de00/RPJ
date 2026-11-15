@@ -6,7 +6,6 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.CombattimentoIniziato;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.Notifica;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaPersa;
-import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaVinta;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.RiposoEffettuato;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.StanzaCompletata;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.TurnoEseguito;
@@ -48,7 +47,6 @@ public class ControllerEsplorazione implements OsservatorePartita {
                 aggiorna();
             }
             case StanzaCompletata stanzaCompletata -> aggiorna();
-            case PartitaVinta partitaVinta -> navigatore.mostraFine();
             case TurnoEseguito turnoEseguito -> {}
             case PartitaPersa partitaPersa -> {}
         }
@@ -56,7 +54,7 @@ public class ControllerEsplorazione implements OsservatorePartita {
 
     private void aggiorna() {
         Entita eroe = partita.getEroe();
-        etichettaStanza.setText("Stanza " + (partita.getStanzeCompletate() + 1) + " di " + partita.getNumeroStanze());
+        etichettaStanza.setText("Stanza " + (partita.getStanzeCompletate() + 1));
         etichettaEroe.setText(eroe.getNome() + " | Vita " + eroe.getVita() + "/" + eroe.getVitaMassima() + " | Mana " + eroe.getMana() + "/" + eroe.getManaMassimo());
     }
 }

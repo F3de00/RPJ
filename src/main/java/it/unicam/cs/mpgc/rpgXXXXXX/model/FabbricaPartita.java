@@ -22,6 +22,6 @@ public class FabbricaPartita {
         if (tipoEroe.categoria() != Categoria.GIOCABILE) {
             throw new IllegalArgumentException("Tipo non giocabile: " + tipoEroe.tipo());
         }
-        return new Partita(new Creatura(tipoEroe.tipo(), tipoEroe), generatore.genera());
+        return new Partita(new Creatura(tipoEroe.tipo(), tipoEroe), generatore);
     }
 }

@@ -7,13 +7,13 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.combattimento.Turno;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.Entita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.EventoCombattimento;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.EventoRiposo;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.GeneratoreDungeon;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.Recupero;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.Stanza;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.CombattimentoIniziato;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.Notifica;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaPersa;
-import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaVinta;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.RiposoEffettuato;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.StanzaCompletata;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.TurnoEseguito;
@@ -22,18 +22,15 @@ import java.util.List;
 
 public class Partita {
     private final Entita eroe;
-    private final List<Stanza> stanze;
+    private final GeneratoreDungeon generatore;
     private final List<OsservatorePartita> osservatori;
     private int stanzeCompletate;
     private StatoPartita stato;
     private Combattimento combattimentoCorrente;
 
-    public Partita(Entita eroe, List<Stanza> stanze) {
-        if (stanze.isEmpty()) {
-            throw new IllegalArgumentException("Serve almeno una stanza");
-        }
+    public Partita(Entita eroe, GeneratoreDungeon generatore) {
         this.eroe = eroe;
-        this.stanze = List.copyOf(stanze);
+        this.generatore = generatore;
         this.osservatori = new ArrayList<>();
         this.stanzeCompletate = 0;
         this.stato = StatoPartita.ESPLORAZIONE;
@@ -42,7 +39,6 @@ public class Partita {
     public Entita getEroe() {return eroe;}
     public StatoPartita getStato() {return stato;}
     public int getStanzeCompletate() {return stanzeCompletate;}
-    public int getNumeroStanze() {return stanze.size();}
 
     public Combattimento getCombattimentoCorrente() {
         verificaStato(StatoPartita.IN_COMBATTIMENTO);
@@ -58,7 +54,7 @@ public class Partita {
 
     public void entraNellaProssimaStanza() {
         verificaStato(StatoPartita.ESPLORAZIONE);
-        Stanza stanza = stanze.get(stanzeCompletate);
+        Stanza stanza = generatore.generaStanza(stanzeCompletate + 1);
         switch (stanza.getEvento()) {
             case EventoCombattimento combattimento -> avviaCombattimento(combattimento.creaCombattimento(eroe));
             case EventoRiposo riposo -> {
@@ -103,13 +99,7 @@ public class Partita {
 
     private void completaStanza() {
         stanzeCompletate++;
-        if (stanzeCompletate == stanze.size()) {
-            stato = StatoPartita.VITTORIA;
-        }
         avvisaOsservatori(new StanzaCompletata(stanzeCompletate));
-        if (stato == StatoPartita.VITTORIA) {
-            avvisaOsservatori(new PartitaVinta());
-        }
     }
 
     private void avvisaOsservatori(Notifica notifica) {

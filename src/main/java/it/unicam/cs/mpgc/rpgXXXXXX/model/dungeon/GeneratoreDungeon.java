@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.random.RandomGenerator;
 
 public class GeneratoreDungeon {
+    private static final int STANZE_PER_CICLO = 4;
     private static final int NEMICI_PER_STANZA = 2;
     private static final int PERCENTUALE_RIPOSO = 50;
 
@@ -21,13 +22,16 @@ public class GeneratoreDungeon {
         this.random = random;
     }
 
-    public List<Stanza> genera() {
-        List<Stanza> stanze = new ArrayList<>();
-        stanze.add(new Stanza(new EventoCombattimento(creaNemici(Categoria.NEMICO_SEMPLICE, NEMICI_PER_STANZA))));
-        stanze.add(new Stanza(new EventoCombattimento(creaNemici(Categoria.NEMICO_SEMPLICE, NEMICI_PER_STANZA))));
-        stanze.add(new Stanza(new EventoRiposo(PERCENTUALE_RIPOSO)));
-        stanze.add(new Stanza(new EventoCombattimento(creaNemici(Categoria.BOSS, 1))));
-        return List.copyOf(stanze);
+    public Stanza generaStanza(int numero) {
+        if (numero < 1) {
+            throw new IllegalArgumentException("Numero di stanza non valido: " + numero);
+        }
+        int posizioneNelCiclo = (numero - 1) % STANZE_PER_CICLO + 1;
+        return switch (posizioneNelCiclo) {
+            case 1, 2 -> new Stanza(new EventoCombattimento(creaNemici(Categoria.NEMICO_SEMPLICE, NEMICI_PER_STANZA)));
+            case 3 -> new Stanza(new EventoRiposo(PERCENTUALE_RIPOSO));
+            default -> new Stanza(new EventoCombattimento(creaNemici(Categoria.BOSS, 1)));
+        };
     }
 
     private List<Entita> creaNemici(Categoria categoria, int quanti) {
@@ -35,23 +39,11 @@ public class GeneratoreDungeon {
         if (disponibili.isEmpty()) {
             throw new IllegalStateException("Nessun nemico nella categoria " + categoria);
         }
-        List<StatisticheBase> scelte = new ArrayList<>();
-        for (int i = 0; i < quanti; i++) {
-            scelte.add(disponibili.get(random.nextInt(disponibili.size())));
-        }
         List<Entita> nemici = new ArrayList<>();
-        for (StatisticheBase scelta : scelte) {
-            nemici.add(new Creatura(nomeNemico(scelta, scelte, nemici), scelta));
+        for (int i = 0; i < quanti; i++) {
+            StatisticheBase scelta = disponibili.get(random.nextInt(disponibili.size()));
+            nemici.add(new Creatura(scelta.tipo(), scelta));
         }
         return nemici;
-    }
-
-    private String nomeNemico(StatisticheBase scelta, List<StatisticheBase> scelte, List<Entita> giaCreati) {
-        long stessoTipo = scelte.stream().filter(s -> s == scelta).count();
-        if (stessoTipo == 1) {
-            return scelta.tipo();
-        }
-        long giaNumerati = giaCreati.stream().filter(e -> e.getNome().startsWith(scelta.tipo() + " ")).count();
-        return scelta.tipo() + " " + (giaNumerati + 1);
     }
 }

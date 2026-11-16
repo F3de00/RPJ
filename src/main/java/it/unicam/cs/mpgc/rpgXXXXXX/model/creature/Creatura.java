@@ -8,12 +8,14 @@ import java.util.List;
 public class Creatura implements Entita {
     private final String nome;
     private final StatisticheBase statisticheBase;
+    private Bonus bonusTotale;
     private int vita;
     private int mana;
 
     public Creatura(String nome, StatisticheBase statisticheBase) {
         this.nome = nome;
         this.statisticheBase = statisticheBase;
+        this.bonusTotale = Bonus.NESSUNO;
         this.vita = statisticheBase.vitaMassima();
         this.mana = statisticheBase.manaMassimo();
     }
@@ -42,7 +44,7 @@ public class Creatura implements Entita {
     public int recuperaVita(int quantita) {
         verificaNonNegativa(quantita);
         int vitaPrima = vita;
-        vita = Math.min(statisticheBase.vitaMassima(), vita + quantita);
+        vita = Math.min(getVitaMassima(), vita + quantita);
         return vita - vitaPrima;
     }
 
@@ -50,21 +52,28 @@ public class Creatura implements Entita {
     public int recuperaMana(int quantita) {
         verificaNonNegativa(quantita);
         int manaPrima = mana;
-        mana = Math.min(statisticheBase.manaMassimo(), mana + quantita);
+        mana = Math.min(getManaMassimo(), mana + quantita);
         return mana - manaPrima;
+    }
+
+    public void aggiungiBonus(Bonus nuovoBonus) {
+        bonusTotale = bonusTotale.aggiungi(nuovoBonus);
+        vita += nuovoBonus.vita();
+        mana += nuovoBonus.mana();
     }
 
     @Override public List<Azione> getAzioni() {return statisticheBase.azioni();}
     @Override public String getNome() {return nome;}
     @Override public int getVita() {return vita;}
     @Override public int getMana() {return mana;}
-    @Override public int getVitaMassima() {return statisticheBase.vitaMassima();}
-    @Override public int getManaMassimo() {return statisticheBase.manaMassimo();}
-    @Override public int getAttacco() {return statisticheBase.attacco();}
-    @Override public int getVelocita() {return statisticheBase.velocita();}
+    @Override public int getVitaMassima() {return statisticheBase.vitaMassima() + bonusTotale.vita();}
+    @Override public int getManaMassimo() {return statisticheBase.manaMassimo() + bonusTotale.mana();}
+    @Override public int getAttacco() {return statisticheBase.attacco() + bonusTotale.attacco();}
+    @Override public int getVelocita() {return statisticheBase.velocita() + bonusTotale.velocita();}
     @Override public boolean isViva() {return vita > 0;}
 
     public StatisticheBase getStatisticheBase() {return statisticheBase;}
+    public Bonus getBonusTotale() {return bonusTotale;}
 
     private static void verificaNonNegativa(int quantita) {
         if (quantita < 0) {

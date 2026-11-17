@@ -18,4 +18,5 @@ public interface Entita {
     int recuperaVita(int quantita);
     int recuperaMana(int quantita);
     boolean isViva();
+    void aggiungiBonus(Bonus nuovoBonus);
 }

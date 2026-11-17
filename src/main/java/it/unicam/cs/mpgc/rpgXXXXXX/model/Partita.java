@@ -79,6 +79,12 @@ public class Partita {
         aggiornaDopoTurno();
     }
 
+    public void scegliPotenziamento(Potenziamento scelta) {
+        verificaStato(StatoPartita.POTENZIAMENTO);
+        eroe.aggiungiBonus(scelta.getBonus());
+        stato = StatoPartita.ESPLORAZIONE;
+    }
+
     private void avviaCombattimento(Combattimento combattimento) {
         combattimentoCorrente = combattimento;
         stato = StatoPartita.IN_COMBATTIMENTO;
@@ -99,6 +105,9 @@ public class Partita {
 
     private void completaStanza() {
         stanzeCompletate++;
+        if (generatore.isUltimaDelCiclo(stanzeCompletate)) {
+            stato = StatoPartita.POTENZIAMENTO;
+        }
         avvisaOsservatori(new StanzaCompletata(stanzeCompletate));
     }
 

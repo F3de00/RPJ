@@ -44,6 +44,11 @@ public class Navigatore {
         mostra(carica("Combattimento.fxml", controller), controller);
     }
 
+    public void mostraPotenziamento() {
+        ControllerPotenziamento controller = new ControllerPotenziamento(partita, this);
+        mostra(carica("Potenziamento.fxml", controller), null);
+    }
+
     public void mostraFine() {
         ControllerFine controller = new ControllerFine(partita, this);
         mostra(carica("Fine.fxml", controller), null);

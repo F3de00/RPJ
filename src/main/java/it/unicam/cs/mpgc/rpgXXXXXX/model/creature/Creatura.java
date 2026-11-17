@@ -56,6 +56,7 @@ public class Creatura implements Entita {
         return mana - manaPrima;
     }
 
+    @Override
     public void aggiungiBonus(Bonus nuovoBonus) {
         bonusTotale = bonusTotale.aggiungi(nuovoBonus);
         vita += nuovoBonus.vita();

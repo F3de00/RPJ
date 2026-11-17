@@ -37,6 +37,8 @@ public class GeneratoreDungeon {
         };
     }
 
+    public boolean isUltimaDelCiclo(int numero) {return numero % STANZE_PER_CICLO == 0;}
+
     private List<Entita> creaNemici(Categoria categoria, int quanti, int ciclo) {
         List<StatisticheBase> disponibili = catalogo.getPerCategoria(categoria);
         if (disponibili.isEmpty()) {

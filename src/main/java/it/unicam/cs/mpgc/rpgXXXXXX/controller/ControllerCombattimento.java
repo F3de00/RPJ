@@ -57,10 +57,11 @@ public class ControllerCombattimento implements OsservatorePartita {
 
     @FXML
     private void continua() {
-        if (partita.getStato() == StatoPartita.ESPLORAZIONE) {
-            navigatore.mostraEsplorazione();
-        } else {
-            navigatore.mostraFine();
+        switch (partita.getStato()) {
+            case ESPLORAZIONE -> navigatore.mostraEsplorazione();
+            case POTENZIAMENTO -> navigatore.mostraPotenziamento();
+            case GAME_OVER -> navigatore.mostraFine();
+            case IN_COMBATTIMENTO -> {}
         }
     }
 
@@ -74,7 +75,7 @@ public class ControllerCombattimento implements OsservatorePartita {
                 }
                 aggiorna();
             }
-            case StanzaCompletata stanzaCompletata -> mostraEsito("Vittoria!");
+            case StanzaCompletata stanzaCompletata -> mostraEsito(partita.getStato() == StatoPartita.POTENZIAMENTO ? "Vittoria! Scegli un potenziamento" : "Vittoria!");
             case PartitaPersa partitaPersa -> mostraEsito("Sconfitta...");
             case CombattimentoIniziato combattimentoIniziato -> {}
             case RiposoEffettuato riposoEffettuato -> {}

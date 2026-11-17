@@ -20,8 +20,6 @@ public class ControllerEsplorazione implements OsservatorePartita {
     private Label etichettaStanza;
     @FXML
     private Label etichettaEroe;
-    @FXML
-    private Label etichettaMessaggio;
 
     public ControllerEsplorazione(Partita partita, Navigatore navigatore) {
         this.partita = partita;
@@ -42,10 +40,7 @@ public class ControllerEsplorazione implements OsservatorePartita {
     public void riceviNotifica(Notifica notifica) {
         switch (notifica) {
             case CombattimentoIniziato combattimentoIniziato -> navigatore.mostraCombattimento();
-            case RiposoEffettuato riposo -> {
-                etichettaMessaggio.setText("Ti riposi: +" + riposo.vitaRecuperata() + " vita, +" + riposo.manaRecuperato() + " mana");
-                aggiorna();
-            }
+            case RiposoEffettuato riposo -> navigatore.mostraRiposo(riposo);
             case StanzaCompletata stanzaCompletata -> aggiorna();
             case TurnoEseguito turnoEseguito -> {}
             case PartitaPersa partitaPersa -> {}

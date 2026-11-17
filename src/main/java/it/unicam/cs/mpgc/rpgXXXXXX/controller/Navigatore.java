@@ -4,6 +4,7 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.FabbricaPartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.Partita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.StatisticheBase;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.RiposoEffettuato;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,11 @@ public class Navigatore {
     public void mostraCombattimento() {
         ControllerCombattimento controller = new ControllerCombattimento(partita, this);
         mostra(carica("Combattimento.fxml", controller), controller);
+    }
+
+    public void mostraRiposo(RiposoEffettuato riposo) {
+        ControllerRiposo controller = new ControllerRiposo(partita, this, riposo);
+        mostra(carica("Riposo.fxml", controller), null);
     }
 
     public void mostraPotenziamento() {

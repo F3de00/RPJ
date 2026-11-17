@@ -56,12 +56,13 @@ public class Partita {
 
     public void entraNellaProssimaStanza() {
         verificaStato(StatoPartita.ESPLORAZIONE);
-        Stanza stanza = generatore.generaStanza(stanzeCompletate + 1);
+        int numeroStanza = stanzeCompletate + 1;
+        Stanza stanza = generatore.generaStanza(numeroStanza);
         switch (stanza.getEvento()) {
             case EventoCombattimento combattimento -> avviaCombattimento(combattimento.creaCombattimento(eroe));
             case EventoRiposo riposo -> {
                 Recupero recupero = riposo.applica(eroe);
-                avvisaOsservatori(new RiposoEffettuato(recupero.vita(), recupero.mana()));
+                avvisaOsservatori(new RiposoEffettuato(numeroStanza, recupero.vita(), recupero.mana()));
                 completaStanza();
             }
         }

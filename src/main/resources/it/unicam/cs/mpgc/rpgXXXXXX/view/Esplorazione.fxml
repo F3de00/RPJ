@@ -7,6 +7,5 @@
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="24" styleClass="schermata" stylesheets="@stile.css">
     <Label fx:id="etichettaStanza" styleClass="titolo"/>
     <Label fx:id="etichettaEroe" styleClass="testo"/>
-    <Label fx:id="etichettaMessaggio" styleClass="sottotitolo"/>
     <Button text="Entra nella stanza" onAction="#entra" styleClass="pulsante"/>
 </VBox>

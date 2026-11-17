@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="24" styleClass="schermata" stylesheets="@stile.css">
     <Label text="Ciclo completato!" styleClass="titolo"/>
-    <Label text="Scegli un potenziamento" styleClass="sottotitolo"/>
+    <Label text="Scegli un potenziamento: recuperi anche metà della vita e del mana" styleClass="sottotitolo"/>
     <Label fx:id="etichettaEroe" styleClass="testo"/>
     <HBox fx:id="contenitorePotenziamenti" alignment="CENTER" spacing="16"/>
 </VBox>

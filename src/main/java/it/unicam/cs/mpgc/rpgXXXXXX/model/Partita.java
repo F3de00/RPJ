@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Partita {
+    private static final int PERCENTUALE_RECUPERO_POTENZIAMENTO = 50;
+
     private final Entita eroe;
     private final GeneratoreDungeon generatore;
     private final List<OsservatorePartita> osservatori;
@@ -82,6 +84,8 @@ public class Partita {
     public void scegliPotenziamento(Potenziamento scelta) {
         verificaStato(StatoPartita.POTENZIAMENTO);
         eroe.aggiungiBonus(scelta.getBonus());
+        eroe.recuperaVita(eroe.getVitaMassima() * PERCENTUALE_RECUPERO_POTENZIAMENTO / 100);
+        eroe.recuperaMana(eroe.getManaMassimo() * PERCENTUALE_RECUPERO_POTENZIAMENTO / 100);
         stato = StatoPartita.ESPLORAZIONE;
     }
 

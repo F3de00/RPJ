@@ -14,7 +14,7 @@ public class GeneratoreDungeon {
     private static final int STANZE_PER_CICLO = 4;
     private static final int NEMICI_PER_STANZA = 2;
     private static final int PERCENTUALE_RIPOSO = 50;
-    private static final int AUMENTO_BONUS_PER_CICLO = 10;
+    private static final int AUMENTO_BONUS_PER_CICLO = 20;
 
     private final CatalogoStatistiche catalogo;
     private final RandomGenerator random;

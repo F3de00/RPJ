@@ -52,6 +52,9 @@ public class ControllerCombattimento implements OsservatorePartita {
     @FXML
     private void initialize() {
         aggiorna();
+    }
+
+    public void inizia() {
         avviaTurniNemici();
     }
 

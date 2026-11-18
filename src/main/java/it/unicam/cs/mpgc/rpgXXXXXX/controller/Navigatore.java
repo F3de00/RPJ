@@ -43,6 +43,7 @@ public class Navigatore {
     public void mostraCombattimento() {
         ControllerCombattimento controller = new ControllerCombattimento(partita, this);
         mostra(carica("Combattimento.fxml", controller), controller);
+        controller.inizia();
     }
 
     public void mostraRiposo(RiposoEffettuato riposo) {

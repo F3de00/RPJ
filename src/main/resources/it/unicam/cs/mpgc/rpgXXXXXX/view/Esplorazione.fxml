@@ -8,4 +8,5 @@
     <Label fx:id="etichettaStanza" styleClass="titolo"/>
     <Label fx:id="etichettaEroe" styleClass="testo"/>
     <Button text="Entra nella stanza" onAction="#entra" styleClass="pulsante"/>
+    <Button text="Salva ed esci" onAction="#salvaEdEsci" styleClass="pulsante"/>
 </VBox>

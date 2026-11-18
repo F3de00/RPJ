@@ -36,6 +36,11 @@ public class ControllerEsplorazione implements OsservatorePartita {
         partita.entraNellaProssimaStanza();
     }
 
+    @FXML
+    private void salvaEdEsci() {
+        navigatore.salvaEdEsci();
+    }
+
     @Override
     public void riceviNotifica(Notifica notifica) {
         switch (notifica) {

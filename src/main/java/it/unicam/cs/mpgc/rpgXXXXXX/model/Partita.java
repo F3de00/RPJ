@@ -17,6 +17,7 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.PartitaPersa;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.RiposoEffettuato;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.StanzaCompletata;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.TurnoEseguito;
+import it.unicam.cs.mpgc.rpgXXXXXX.model.salvataggi.PartitaSalvata;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +31,14 @@ public class Partita {
     private StatoPartita stato;
     private Combattimento combattimentoCorrente;
 
-    public Partita(Entita eroe, GeneratoreDungeon generatore) {
+    public Partita(Entita eroe, GeneratoreDungeon generatore, int stanzeCompletate) {
+        if (stanzeCompletate < 0) {
+            throw new IllegalArgumentException("Stanze completate non valide: " + stanzeCompletate);
+        }
         this.eroe = eroe;
         this.generatore = generatore;
         this.osservatori = new ArrayList<>();
-        this.stanzeCompletate = 0;
+        this.stanzeCompletate = stanzeCompletate;
         this.stato = StatoPartita.ESPLORAZIONE;
     }
 
@@ -88,6 +92,11 @@ public class Partita {
         eroe.recuperaVita(eroe.getVitaMassima() * PERCENTUALE_RECUPERO_POTENZIAMENTO / 100);
         eroe.recuperaMana(eroe.getManaMassimo() * PERCENTUALE_RECUPERO_POTENZIAMENTO / 100);
         stato = StatoPartita.ESPLORAZIONE;
+    }
+
+    public PartitaSalvata creaSalvataggio() {
+        verificaStato(StatoPartita.ESPLORAZIONE);
+        return new PartitaSalvata(eroe.getTipo(), eroe.getVita(), eroe.getMana(), eroe.getBonusTotale(), stanzeCompletate);
     }
 
     private void avviaCombattimento(Combattimento combattimento) {

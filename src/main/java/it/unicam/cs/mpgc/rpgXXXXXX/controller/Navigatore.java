@@ -1,10 +1,10 @@
 package it.unicam.cs.mpgc.rpgXXXXXX.controller;
 
-import it.unicam.cs.mpgc.rpgXXXXXX.model.FabbricaPartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.Partita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.StatisticheBase;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.OsservatorePartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche.RiposoEffettuato;
+import it.unicam.cs.mpgc.rpgXXXXXX.servizi.ServizioPartite;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import javafx.fxml.FXMLLoader;
@@ -15,24 +15,35 @@ public class Navigatore {
     private static final String PERCORSO_FXML = "/it/unicam/cs/mpgc/rpgXXXXXX/view/";
 
     private final Scene scena;
-    private final FabbricaPartita fabbrica;
+    private final ServizioPartite servizio;
     private Partita partita;
     private OsservatorePartita osservatoreCorrente;
 
-    public Navigatore(Scene scena, FabbricaPartita fabbrica) {
+    public Navigatore(Scene scena, ServizioPartite servizio) {
         this.scena = scena;
-        this.fabbrica = fabbrica;
+        this.servizio = servizio;
     }
 
     public void mostraSceltaEroe() {
-        ControllerSceltaEroe controller = new ControllerSceltaEroe(fabbrica.getEroiDisponibili(), this);
+        ControllerSceltaEroe controller = new ControllerSceltaEroe(servizio, this);
         mostra(carica("SceltaEroe.fxml", controller), null);
     }
 
     public void iniziaPartita(StatisticheBase tipoEroe) {
         cambiaOsservatore(null);
-        partita = fabbrica.nuovaPartita(tipoEroe);
+        partita = servizio.nuovaPartita(tipoEroe);
         mostraEsplorazione();
+    }
+
+    public void riprendiPartita() {
+        cambiaOsservatore(null);
+        partita = servizio.riprendiPartita();
+        mostraEsplorazione();
+    }
+
+    public void salvaEdEsci() {
+        servizio.salvaPartita(partita);
+        mostraSceltaEroe();
     }
 
     public void mostraEsplorazione() {

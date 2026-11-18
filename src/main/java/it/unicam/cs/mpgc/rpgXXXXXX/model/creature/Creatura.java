@@ -13,11 +13,21 @@ public class Creatura implements Entita {
     private int mana;
 
     public Creatura(String nome, StatisticheBase statisticheBase) {
+        this(nome, statisticheBase, Bonus.NESSUNO, statisticheBase.vitaMassima(), statisticheBase.manaMassimo());
+    }
+
+    public Creatura(String nome, StatisticheBase statisticheBase, Bonus bonusTotale, int vita, int mana) {
         this.nome = nome;
         this.statisticheBase = statisticheBase;
-        this.bonusTotale = Bonus.NESSUNO;
-        this.vita = statisticheBase.vitaMassima();
-        this.mana = statisticheBase.manaMassimo();
+        this.bonusTotale = bonusTotale;
+        if (vita < 1 || vita > getVitaMassima()) {
+            throw new IllegalArgumentException("Vita non valida: " + vita);
+        }
+        if (mana < 0 || mana > getManaMassimo()) {
+            throw new IllegalArgumentException("Mana non valido: " + mana);
+        }
+        this.vita = vita;
+        this.mana = mana;
     }
 
     @Override
@@ -65,6 +75,7 @@ public class Creatura implements Entita {
 
     @Override public List<Azione> getAzioni() {return statisticheBase.azioni();}
     @Override public String getNome() {return nome;}
+    @Override public String getTipo() {return statisticheBase.tipo();}
     @Override public int getVita() {return vita;}
     @Override public int getMana() {return mana;}
     @Override public int getVitaMassima() {return statisticheBase.vitaMassima() + bonusTotale.vita();}
@@ -74,7 +85,7 @@ public class Creatura implements Entita {
     @Override public boolean isViva() {return vita > 0;}
 
     public StatisticheBase getStatisticheBase() {return statisticheBase;}
-    public Bonus getBonusTotale() {return bonusTotale;}
+    @Override public Bonus getBonusTotale() {return bonusTotale;}
 
     private static void verificaNonNegativa(int quantita) {
         if (quantita < 0) {

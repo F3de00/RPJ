@@ -5,6 +5,9 @@ import it.unicam.cs.mpgc.rpgXXXXXX.model.FabbricaPartita;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.CatalogoPredefinito;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.creature.CatalogoStatistiche;
 import it.unicam.cs.mpgc.rpgXXXXXX.model.dungeon.GeneratoreDungeon;
+import it.unicam.cs.mpgc.rpgXXXXXX.persistenza.RepositoryPartiteJson;
+import it.unicam.cs.mpgc.rpgXXXXXX.servizi.ServizioPartite;
+import java.nio.file.Path;
 import java.util.Random;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -17,14 +20,16 @@ public class App extends Application {
     private static final double LARGHEZZA = 960;
     private static final double ALTEZZA = 640;
     private static final double PORZIONE_SCHERMO = 0.9;
+    private static final Path CARTELLA_SALVATAGGI = Path.of(System.getProperty("user.home"), ".rpj");
 
     @Override
     public void start(Stage stage) {
         CatalogoStatistiche catalogo = new CatalogoPredefinito();
         GeneratoreDungeon generatore = new GeneratoreDungeon(catalogo, new Random());
         FabbricaPartita fabbrica = new FabbricaPartita(catalogo, generatore);
+        ServizioPartite servizio = new ServizioPartite(fabbrica, new RepositoryPartiteJson(CARTELLA_SALVATAGGI));
         Scene scena = creaScena();
-        Navigatore navigatore = new Navigatore(scena, fabbrica);
+        Navigatore navigatore = new Navigatore(scena, servizio);
         stage.setTitle("RPJ - Dungeon Crawler");
         stage.setScene(scena);
         stage.setResizable(false);

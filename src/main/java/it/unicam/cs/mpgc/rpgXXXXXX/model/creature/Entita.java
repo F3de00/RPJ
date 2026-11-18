@@ -8,6 +8,7 @@ public interface Entita {
     Risultato compiAzione(Azione azione, Entita bersaglio);
     List<Azione> getAzioni();
     String getNome();
+    String getTipo();
     int getVita();
     int getMana();
     int getVitaMassima();
@@ -19,4 +20,5 @@ public interface Entita {
     int recuperaMana(int quantita);
     boolean isViva();
     void aggiungiBonus(Bonus nuovoBonus);
+    Bonus getBonusTotale();
 }

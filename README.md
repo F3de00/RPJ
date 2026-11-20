@@ -1,11 +1,13 @@
 # RPJ - Dungeon Crawler
 
-Gioco di ruolo a turni in stile dungeon crawler, sviluppato in Java con interfaccia JavaFX.
+Gioco di ruolo a turni in Java con interfaccia JavaFX, realizzato per l'esame di Metodologie di Programmazione (UNICAM, AA 2025/26).
+
+Il giocatore sceglie un eroe e attraversa un dungeon infinito, stanza dopo stanza: combattimenti a turni contro nemici sempre più forti, stanze di riposo e un boss alla fine di ogni ciclo, dopo il quale l'eroe sceglie un potenziamento. La partita finisce quando l'eroe viene sconfitto: lo scopo è superare più stanze possibile. La partita in corso si può salvare tra una stanza e l'altra e riprendere in seguito; il gioco ricorda l'ultima partita e il record.
 
 ## Requisiti
 
-- JDK 25 o superiore
-- Nessuna installazione di Gradle necessaria (viene usato il wrapper)
+- JDK 25
+- Nessuna installazione di Gradle: viene usato il wrapper incluso
 
 ## Compilazione ed esecuzione
 
@@ -14,30 +16,25 @@ Gioco di ruolo a turni in stile dungeon crawler, sviluppato in Java con interfac
 ./gradlew run
 ```
 
+I salvataggi vengono scritti in formato JSON nella cartella `.rpj` della home dell'utente. Per ripartire da zero basta cancellarla.
+
 ## Struttura del progetto
 
 ```
-.
-├── build.gradle
-├── settings.gradle
-├── gradlew / gradlew.bat
-├── docs/                 # specifica del progetto
-└── src/
-    ├── main/java/it/unicam/cs/mpgc/rpgXXXXXX/
-    │   ├── App.java      # punto di ingresso JavaFX
-    │   ├── model/        # dominio e regole di gioco
-    │   ├── view/         # interfaccia grafica
-    │   ├── controller/   # orchestrazione dei casi d'uso
-    │   └── persistence/  # salvataggio e caricamento
-    └── test/java/        # test automatici
+src/main/java/it/unicam/cs/mpgc/rpgXXXXXX/
+├── App.java       avvio dell'applicazione JavaFX
+├── model/         regole e stato del gioco (creature, azioni, combattimento, dungeon, notifiche, salvataggi)
+├── servizi/       casi d'uso della partita: nuova partita, salvataggio, ripresa, risultati
+├── persistenza/   salvataggio su file JSON
+└── controller/    controller delle schermate e navigazione
+src/main/resources/it/unicam/cs/mpgc/rpgXXXXXX/view/
+                   schermate FXML e foglio di stile
 ```
-
-Il package contiene il segnaposto `rpgXXXXXX`: va sostituito con `rpg` seguito dalla propria matricola.
 
 ## Documentazione
 
-- [Specifica del progetto](docs/specifica-progetto-aa-2025-26.pdf)
+La descrizione delle funzionalità, delle responsabilità, delle classi, della persistenza e dei meccanismi di estensione è nella [Wiki del progetto](https://github.com/F3de00/RPJ/wiki).
 
 ## Uso di strumenti di AI
 
-_Dichiarazione da completare durante lo sviluppo: strumenti utilizzati e scopo._
+Nella realizzazione del progetto è stato usato Claude Code (Anthropic) come assistente, per discutere le scelte di progettazione, accelerare la scrittura di alcune parti del codice delle classi che venivano definite, verificare il bilanciamento con simulazioni e preparare la documentazione.

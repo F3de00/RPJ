@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="24" styleClass="schermata" stylesheets="@stile.css">
-    <Label text="RPJ - Dungeon Crawler" styleClass="titolo"/>
+    <Label text="Endless Depths" styleClass="titolo"/>
     <Label fx:id="etichettaUltimaPartita" styleClass="testo"/>
     <Label fx:id="etichettaMigliorePartita" styleClass="testo"/>
     <Button fx:id="pulsanteContinua" text="Continua partita" onAction="#continuaPartita" styleClass="pulsante"/>

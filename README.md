@@ -1,6 +1,6 @@
-# RPJ - Dungeon Crawler
+# Endless Depths
 
-Gioco di ruolo a turni in Java con interfaccia JavaFX, realizzato per l'esame di Metodologie di Programmazione (UNICAM, AA 2025/26).
+Gioco di ruolo a turni.
 
 Il giocatore sceglie un eroe e attraversa un dungeon infinito, stanza dopo stanza: combattimenti a turni contro nemici sempre più forti, stanze di riposo e un boss alla fine di ogni ciclo, dopo il quale l'eroe sceglie un potenziamento. La partita finisce quando l'eroe viene sconfitto: lo scopo è superare più stanze possibile. La partita in corso si può salvare tra una stanza e l'altra e riprendere in seguito; il gioco ricorda l'ultima partita e il record.
 

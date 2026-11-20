@@ -31,7 +31,7 @@ public class App extends Application {
         ServizioPartite servizio = new ServizioPartite(fabbrica, new RepositoryPartiteJson(CARTELLA_SALVATAGGI));
         Scene scena = creaScena();
         Navigatore navigatore = new Navigatore(scena, servizio);
-        stage.setTitle("RPJ - Dungeon Crawler");
+        stage.setTitle("Endless Depths");
         stage.setScene(scena);
         stage.setResizable(false);
         navigatore.mostraSceltaEroe();

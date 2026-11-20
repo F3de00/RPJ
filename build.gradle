@@ -22,7 +22,7 @@ javafx {
 }
 
 application {
-    mainClass = 'it.unicam.cs.mpgc.rpgXXXXXX.App'
+    mainClass = 'it.unicam.cs.mpgc.rpg127378.App'
     applicationDefaultJvmArgs = ['--enable-native-access=javafx.graphics']
 }
 

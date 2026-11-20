@@ -1,3 +1,0 @@
-package it.unicam.cs.mpgc.rpgXXXXXX.model.notifiche;
-
-public record RiposoEffettuato(int numeroStanza, int vitaRecuperata, int manaRecuperato) implements Notifica {}

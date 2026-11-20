@@ -21,13 +21,13 @@ I salvataggi vengono scritti in formato JSON nella cartella `.rpj` della home de
 ## Struttura del progetto
 
 ```
-src/main/java/it/unicam/cs/mpgc/rpgXXXXXX/
+src/main/java/it/unicam/cs/mpgc/rpg127378/
 ├── App.java       avvio dell'applicazione JavaFX
 ├── model/         regole e stato del gioco (creature, azioni, combattimento, dungeon, notifiche, salvataggi)
 ├── servizi/       casi d'uso della partita: nuova partita, salvataggio, ripresa, risultati
 ├── persistenza/   salvataggio su file JSON
 └── controller/    controller delle schermate e navigazione
-src/main/resources/it/unicam/cs/mpgc/rpgXXXXXX/view/
+src/main/resources/it/unicam/cs/mpgc/rpg127378/view/
                    schermate FXML e foglio di stile
 ```
 
